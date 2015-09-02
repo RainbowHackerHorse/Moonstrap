@@ -29,8 +29,16 @@ graphics/graphite2 audio/libvorbis multimedia/libvpx databases/sqlite3 databases
 multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-multimedia/gstreamer1-libav lang/perl5.20 lang/gcc49 archivers/p7zip shells/bash devel/py-virtualenv devel/git \
-gtk2 devel/glib20 devel/py-gobject devel/dbus devel/dbus-glib devel/yasm
+multimedia/gstreamer1-libav lang/perl5.20 lang/gcc49 shells/bash devel/py-virtualenv devel/git \
+ devel/py-gobject devel/dbus devel/yasm
+
+echo "Installing Library Dependancies"
+
+pkg install multimedia/libv4l graphics/cairo devel/libevent2 devel/libffi graphics/graphite2 \
+print/harfbuzz textproc/hunspell devel/icu devel/nspr security/nss graphics/png x11/pixman \
+audio/soundtouch databases/sqlite3 multimedia/libvpx audio/libvorbis devel/dbus-glib \
+x11/startup-notification audio/alsa-lib converters/libiconv graphics/jpeg accessibility/atk \
+devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
 echo "Modifying /etc/make.conf as Pale Moon will not build correctly with Clang"
 echo "CC=gcc49" > /etc/make.conf
