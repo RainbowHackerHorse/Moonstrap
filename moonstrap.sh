@@ -54,7 +54,7 @@ ln -s /root /usr/home/root
 mkdir /usr/home/root/pmbuild
 cd /root
 fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/mozconfig.txt
-fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/autobuild.sh
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
 chmod +x build.sh
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
@@ -64,4 +64,5 @@ cd ..
 chmod -R +x pmsrc/
 ./pmsrc/configure
 echo "Building! Cross your fingers!"
-bash ./autobuild.sh
+#bash ./autobuild.sh
+bash ./build.sh
