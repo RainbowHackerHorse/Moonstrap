@@ -45,8 +45,8 @@ ln -s /usr/home /home
 ln -s /root /usr/home/root
 mkdir /usr/home/root/pmbuild
 cd /root
-fetch http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/mozconfig.txt
-fetch http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/build.sh
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.4/mozconfig.txt
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.4/build.sh
 chmod +x build.sh
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
