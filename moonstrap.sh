@@ -8,7 +8,7 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.4
+Moonstrap Version 0.5
 Pale Moon Version 25.7       
                                          
 EOT
@@ -45,8 +45,8 @@ ln -s /usr/home /home
 ln -s /root /usr/home/root
 mkdir /usr/home/root/pmbuild
 cd /root
-fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.4/mozconfig.txt
-fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.4/build.sh
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/mozconfig.txt
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/autobuild.sh
 chmod +x build.sh
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
@@ -56,4 +56,4 @@ cd ..
 chmod -R +x pmsrc/
 ./pmsrc/configure
 echo "Building! Cross your fingers!"
-bash ./build.sh
+bash ./autobuild.sh
