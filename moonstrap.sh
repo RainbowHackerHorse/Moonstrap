@@ -22,7 +22,7 @@ echo "The original script can always be found at http://cloudsdale.ponix.space/~
 
 echo "Bootstrapping build environment"
 echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
-echo "Calling pkgng:"
+echo "Calling pkgng: "
 
 pkg install devel/nspr security/nss devel/libevent2 audio/soundtouch print/harfbuzz \
 graphics/graphite2 audio/libvorbis multimedia/libvpx databases/sqlite3 databases/py-sqlite3 \
