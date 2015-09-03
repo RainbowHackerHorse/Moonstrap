@@ -73,6 +73,8 @@ case "$(uname -s)" in
 					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
 					yum update -y
 					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+					yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
+					yum install -y 
 					cd
 
          	else 
@@ -134,4 +136,11 @@ chmod -R +x pmsrc/
 #./pmsrc/configure
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
-bash ./build.sh
+case "$(uname -s)" in
+   Linux)
+	scl enable devtoolset-1.1 ./build.sh
+	;;
+   FreeBSD)
+	bash ./build.sh
+	;;
+esac
