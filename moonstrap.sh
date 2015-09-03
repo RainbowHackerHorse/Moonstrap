@@ -21,11 +21,11 @@ echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
 echo "The original script can always be found at http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
 
 if [ "$(uname)" == "Darwin" ]; then
-    echo "OS X IS NOT A BSD. STAHP."      
+   echo "OS X IS NOT A BSD. STAHP."      
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    echo "This script will not function under Linux. Please use something not awful, like FreeBSD"
+   echo "This script will not function under Linux. Please use something not awful, like FreeBSD"
 elif [ "$(expr substr $(uname -s) 1 5)" == "FreeBSD" ]; then
-    echo "Bootstrapping build environment"
+   echo "Bootstrapping build environment"
    echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
    echo "Calling pkgng: "
 
