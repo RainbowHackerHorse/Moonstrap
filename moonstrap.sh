@@ -21,11 +21,15 @@ echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
 echo "The original script can always be found at http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
 
 echo "Now making sure Moonstrap is compatible with your OS..."
-if [ "$(uname)" == "Darwin" ]; then
-   echo "OS X IS NOT A BSD. STAHP."      
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-   echo "This script will not function under Linux. Please use something not awful, like FreeBSD"
-elif [ "$(expr substr $(uname -s) 1 5)" == "FreeBSD" ]; then
+case "$(uname -s)" in
+   Darwin)
+     echo 'OS X IS NOT FREEBSD. STAHP.'
+     ;;
+   Linux)
+     echo 'This script is not compatible with your joke of a UNIX-like OS. Sorry.'
+     ;;
+
+   FreeBSD)
    echo "Bootstrapping build environment"
    echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
    echo "Calling pkgng: "
@@ -72,5 +76,5 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "FreeBSD" ]; then
    echo "Building! Cross your fingers!"
    #bash ./autobuild.sh
    bash ./build.sh
-fi
-
+   ;;
+esac
