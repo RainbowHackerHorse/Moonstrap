@@ -13,8 +13,9 @@ Pale Moon Version 25.7
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
-This script is released under a Simplified 2-Clause BSD license. Support truely Free software,
-and use a BSD license for your projects. GPL restrictions just make it Open, not Free.
+This script is released under a Simplified 2-Clause BSD license. Support 
+truely Free software, and use a BSD license for your projects. 
+GPL restrictions just make it Open, not Free.
                                          
 EOT
 }
@@ -23,7 +24,8 @@ pmlogo
 
 echo "This script written by Rainbow."
 echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
-echo "The original script can always be found at http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
+echo "The original script can always be found at "
+evcho "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
 
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
