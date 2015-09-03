@@ -55,9 +55,9 @@ case "$(uname -s)" in
          			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
          			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 					rpm -ivh epel-release-6-8.noarch.rpm
-         			yum update
+         			yum update -y
          			yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
-					yum groupinstall 'Development Tools' 'GNOME Software Development'
+					yum groupinstall -y 'Development Tools' 'GNOME Software Development'
 					yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
 					wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
 					tar -xf Python-2.7.6.tar.xz
@@ -71,7 +71,7 @@ case "$(uname -s)" in
 					pip2.7 install virtualenv 
          			cd /etc/yum.repos.d
 					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
-					yum update
+					yum update -y
 					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
 					cd
 
@@ -117,7 +117,6 @@ case "$(uname -s)" in
    mkdir /usr/home
    ln -s /usr/home /home
    ln -s /root /usr/home/root
-   mkdir /usr/home/root/pmbuild
    cd /root
    fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/bsdmozconfig.txt
    mv bsdmozconfig.txt mozconfig.txt
@@ -125,6 +124,7 @@ case "$(uname -s)" in
    ;;
 esac
 chmod +x build.sh
+mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
 #cd pmsrc
