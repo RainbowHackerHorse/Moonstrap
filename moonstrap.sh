@@ -73,6 +73,7 @@ case "$(uname -s)" in
 					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
 					yum update
 					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+					cd
 
          	else 
          		echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
