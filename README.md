@@ -16,3 +16,5 @@ Problems currently prevent Pale Moon from building within FreeBSD.
 
 However, Moonstrap handles the needful to prepare the build environment, on TWO WHOLE OSES! :D
 Moonstrap does the needfuls!
+Not only that, the official Linux build distro (CentOS 6) 
+has full, WORKING support! WHOOOOO! \o/ \o\ /o/ \o/
