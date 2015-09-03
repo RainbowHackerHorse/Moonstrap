@@ -30,10 +30,10 @@ evcho "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
    Darwin)
-     echo 'OS X IS NOT FREEBSD. STAHP.'
+     echo "OS X IS NOT FREEBSD. STAHP."
      ;;
    Linux)
-     echo 'This script is not compatible with your joke of a UNIX-like OS. Sorry.'
+     echo "I don't like you, and I don't like your joke of an OS. But Moonstrap 0.6 should have Linux support"
      ;;
 
    FreeBSD)
