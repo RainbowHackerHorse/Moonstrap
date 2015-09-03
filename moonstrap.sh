@@ -20,6 +20,7 @@ echo "This script written by Rainbow."
 echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
 echo "The original script can always be found at http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
 
+echo "Now making sure Moonstrap is compatible with your OS..."
 if [ "$(uname)" == "Darwin" ]; then
    echo "OS X IS NOT A BSD. STAHP."      
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
