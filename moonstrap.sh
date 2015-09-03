@@ -31,6 +31,7 @@ echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
 	Darwin)
 		echo "OS X IS NOT FREEBSD. STAHP."
+		exit 1
 	;;
 	Linux)
 		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
