@@ -35,18 +35,54 @@ case "$(uname -s)" in
    Linux)
      echo "I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
      echo "Now detecting your Distribution"
-      if ls /usr/bin | grep -q apt-get; then
-         echo "You're using a Debian Derivative! Let's find out which"
-         # grep /etc/whatever for Linux type
-      else
+#       if ls /usr/bin | grep -q apt-get; then
+#        	echo "You're using a Debian Derivative! Let's find out which"
+#        	if cat /etc/*-release | grep -q Ubuntu; then
+#         	echo "Ubuntu! Aren't you special? I bet you think you're so great, having just switched from Windows! Installing deps, yo..."
+#         	apt-get update
+#         	apt-get upgrade
+#         	apt-get install #deps list
+#         else
+#         	if cat /etc/*-release | grep -q Debian; then
+#         		echo "Debian! Woohoo! Installing deps, yo!"
+#         		apt-get update
+#         		apt-get upgrade
+#         		apt-get install # deps go here
+#       else
        		if ls /usr/bin | grep -q yum; then
-         	echo "You're using a Yum distro! Let's hope it's not a filthy SystemD-based distro..."
-         	# check disto!
+         	echo "You're using a Yum distro! CentOS 6 is the only supported one, let's check that distro!"
+         		if cat /etc/*-release | grep -q "CentOS release 6"; then
+         			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
+         			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+					rpm -ivh epel-release-6-8.noarch.rpm
+         			yum update
+         			yum install autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+					yum groupinstall 'Development Tools' 'GNOME Software Development'
+					yum install zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
+					wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+					tar -xf Python-2.7.6.tar.xz
+					cd Python-2.7.6
+					./configure --prefix=/usr/local
+					make
+					make altinstall # don't use make install, as that will replace the system python!
+					wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+					python2.7 ez_setup.py
+					easy_install-2.7 pip
+					pip2.7 install virtualenv 
+         			cd /etc/yum.repos.d
+					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
+					yum update
+					yum install devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+
          	else 
          		echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
          		echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
          	fi
-      fi
+       fi
+       wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linbuild.sh
+       wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linmozconfig.txt
+       mv linbuild.sh build.sh
+       mv linmozconfig.txt mozconfig.txt
      ;;
    FreeBSD)
    echo "Bootstrapping build environment"
@@ -82,10 +118,11 @@ case "$(uname -s)" in
    ln -s /root /usr/home/root
    mkdir /usr/home/root/pmbuild
    cd /root
+   fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/bsdmozconfig.txt
+   mv bsdmozconfig.txt mozconfig.txt
+   fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
    ;;
 esac
-fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/mozconfig.txt
-fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
 chmod +x build.sh
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
