@@ -33,7 +33,7 @@ case "$(uname -s)" in
 		echo "OS X IS NOT FREEBSD. STAHP."
 	;;
 	Linux)
-		echo "I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
+		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
 #       if ls /usr/bin | grep -q apt-get; then
 #           echo "You're using a Debian Derivative! Let's find out which"
@@ -89,7 +89,8 @@ case "$(uname -s)" in
 		mv linmozconfig.txt mozconfig.txt
 	;;
 	FreeBSD)
-		echo "Bootstrapping build environment"
+		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
+		echo "Bootstrapping build environment..."
 		echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
 		echo "Calling pkgng: "
 
