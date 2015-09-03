@@ -9,7 +9,12 @@ cat <<"EOT"
                                      /_/     
 
 Moonstrap Version 0.5
-Pale Moon Version 25.7       
+Pale Moon Version 25.7    
+
+You should have received a License file, if you cloned from Github.
+If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
+This script is released under a Simplified 2-Clause BSD license. Support truely Free software,
+and use a BSD license for your projects. GPL restrictions just make it Open, not Free.
                                          
 EOT
 }
