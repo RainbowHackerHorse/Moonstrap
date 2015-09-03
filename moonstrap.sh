@@ -8,7 +8,7 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.5
+Moonstrap Version 0.6
 Pale Moon Version 25.7    
 
 You should have received a License file, if you cloned from Github.
@@ -25,7 +25,7 @@ pmlogo
 echo "This script written by Rainbow."
 echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
 echo "The original script can always be found at "
-evcho "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
+echo "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
 
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
@@ -33,9 +33,21 @@ case "$(uname -s)" in
      echo "OS X IS NOT FREEBSD. STAHP."
      ;;
    Linux)
-     echo "I don't like you, and I don't like your joke of an OS. But Moonstrap 0.6 should have Linux support"
+     echo "I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
+     echo "Now detecting your Distribution"
+      if ls /usr/bin | grep -q apt-get; then
+         echo "You're using a Debian Derivative! Let's find out which"
+         # grep /etc/whatever for Linux type
+      else
+       		if ls /usr/bin | grep -q yum; then
+         	echo "You're using a Yum distro! Let's hope it's not a filthy SystemD-based distro..."
+         	# check disto!
+         	else 
+         		echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
+         		echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
+         	fi
+      fi
      ;;
-
    FreeBSD)
    echo "Bootstrapping build environment"
    echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
@@ -70,18 +82,18 @@ case "$(uname -s)" in
    ln -s /root /usr/home/root
    mkdir /usr/home/root/pmbuild
    cd /root
-   fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/mozconfig.txt
-   fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
-   chmod +x build.sh
-   echo "Grabbing source from Git Branch..."
-   git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
-   #cd pmsrc
-   #autoconf
-   #cd ..
-   chmod -R +x pmsrc/
-   #./pmsrc/configure
-   echo "Building! Cross your fingers!"
-   #bash ./autobuild.sh
-   bash ./build.sh
    ;;
 esac
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/mozconfig.txt
+fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
+chmod +x build.sh
+echo "Grabbing source from Git Branch..."
+git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
+#cd pmsrc
+#autoconf
+#cd ..
+chmod -R +x pmsrc/
+#./pmsrc/configure
+echo "Building! Cross your fingers!"
+#bash ./autobuild.sh
+bash ./build.sh
