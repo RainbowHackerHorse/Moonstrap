@@ -9,7 +9,7 @@ cat <<"EOT"
                                      /_/     
 
 Moonstrap Version 0.6
-Pale Moon Version 25.7    
+Pale Moon Version 26 Beta 2 (Git Master Branch)    
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
