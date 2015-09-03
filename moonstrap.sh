@@ -56,9 +56,9 @@ case "$(uname -s)" in
          			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 					rpm -ivh epel-release-6-8.noarch.rpm
          			yum update
-         			yum install autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+         			yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
 					yum groupinstall 'Development Tools' 'GNOME Software Development'
-					yum install zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
+					yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
 					wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
 					tar -xf Python-2.7.6.tar.xz
 					cd Python-2.7.6
@@ -72,7 +72,7 @@ case "$(uname -s)" in
          			cd /etc/yum.repos.d
 					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
 					yum update
-					yum install devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
 
          	else 
          		echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
