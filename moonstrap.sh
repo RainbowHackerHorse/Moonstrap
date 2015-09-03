@@ -76,6 +76,7 @@ case "$(uname -s)" in
 					yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
 					yum install -y 
 					cd
+					ln -s /root /home/root
 
          	else 
          		echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
