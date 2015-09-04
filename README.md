@@ -22,3 +22,16 @@ However, Moonstrap handles the needful to prepare the build environment, on TWO 
 Moonstrap does the needfuls!
 Not only that, the official Linux build distro (CentOS 6) 
 has full, WORKING support! WHOOOOO! \o/ \o\ /o/ \o/
+
+--------------------------------------------------------
+INSTRUCTIONS:
+
+FreeBSD:
+Run #cd /usr/ports/sysutils/iocage && make install clean
+Create your Jail. Please read man iocage or the docs at http://iocage.readthedocs.org/en/latest/
+Run #iocage console to hop into the jail, then fetch moonstrap.sh and execute with sh moonstrap.sh as root
+
+Linux:
+Wget moonstrap.sh and execute with sh moonstrap.sh as root
+Moonstrap is tested with clean servers from Linode.
+I can't guarantee it will work if you have all sorts of other stuff already installed
