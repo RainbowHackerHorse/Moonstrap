@@ -36,20 +36,22 @@ case "$(uname -s)" in
 	Linux)
 		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
-#       if ls /usr/bin | grep -q apt-get; then
-#           echo "You're using a Debian Derivative! Let's find out which"
-#           if cat /etc/*-release | grep -q Ubuntu; then
-#           echo "Ubuntu! Aren't you special? I bet you think you're so great, having just switched from Windows! Installing deps, yo..."
+       if ls /usr/bin | grep -q apt-get; then
+           echo "You're using a Debian Derivative! Let's find out which"
+           if cat /etc/*-release | grep -q Ubuntu; then
+           echo "Ubuntu! Aren't you special? I bet you think you're so great, having just switched from Windows! I don't have support for you yet."
+           exit 1
 #           apt-get update
 #           apt-get upgrade
 #           apt-get install #deps list
-#         else
-#           if cat /etc/*-release | grep -q Debian; then
-#               echo "Debian! Woohoo! Installing deps, yo!"
+         else
+           if cat /etc/*-release | grep -q Debian; then
+               echo "Debian! Woohoo! I'd install your deps but I don't support you yet bruh"
+               exit 1
 #               apt-get update
 #               apt-get upgrade
 #               apt-get install # deps go here
-#		else
+		else
 			if ls /usr/bin | grep -q yum; then
 			echo "You're using a Yum distro! CentOS 6 is the only supported one, let's check that distro!"
 				if cat /etc/*-release | grep -q "CentOS release 6"; then
@@ -82,6 +84,7 @@ case "$(uname -s)" in
 			else 
 				echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
 				echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
+				exit 1
 			fi
 		fi
 		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linbuild.sh
