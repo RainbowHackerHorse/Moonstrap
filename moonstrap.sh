@@ -42,44 +42,44 @@ case "$(uname -s)" in
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
-					echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
-					wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-					rpm -ivh epel-release-6-8.noarch.rpm
-					yum update -y
-					yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
-					yum groupinstall -y 'Development Tools' 'GNOME Software Development'
-					yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
-					wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
-					tar -xf Python-2.7.6.tar.xz
-					cd Python-2.7.6
-					./configure --prefix=/usr/local
-					make
-					make altinstall # don't use make install, as that will replace the system python!
-					wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-					python2.7 ez_setup.py
-					easy_install-2.7 pip
-					pip2.7 install virtualenv 
-					cd /etc/yum.repos.d
-					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
-					yum update -y
-					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
-					yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
-					yum install -y 
-					cd
-					ln -s /root /home/root
+			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
+			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+			rpm -ivh epel-release-6-8.noarch.rpm
+			yum update -y
+			yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+			yum groupinstall -y 'Development Tools' 'GNOME Software Development'
+			yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
+			wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+			tar -xf Python-2.7.6.tar.xz
+			cd Python-2.7.6
+			./configure --prefix=/usr/local
+			make
+			make altinstall # don't use make install, as that will replace the system python!
+			wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+			python2.7 ez_setup.py
+			easy_install-2.7 pip
+			pip2.7 install virtualenv 
+			cd /etc/yum.repos.d
+			wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
+			yum update -y
+			yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+			yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
+			yum install -y 
+			cd
+			ln -s /root /home/root
 		elif ls /usr/bin | grep -q pacman; then
-					echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
-					pacman -Syu
-					pacman -S --needed base-devel
-					echo "Grabbin the AUR pkgbuild! Oh yeah, we're gettin sexy up in here!"
-					# Trying AUR. Maybe this works, maybe it doesn't. Someone with arch please test? <3
-					mkdir palemoonbuild
-					cd palemoonbuild
-					wget https://aur.archlinux.org/cgit/aur.git/snapshot/palemoon.tar.gz
-					tar xvfz palemoon.tar.gz
-					cd palemoon
-					makepkg -sri
-					exit 0
+			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
+			pacman -Syu
+			pacman -S --needed base-devel
+			echo "Grabbin the AUR pkgbuild! Oh yeah, we're gettin sexy up in here!"
+			# Trying AUR. Maybe this works, maybe it doesn't. Someone with arch please test? <3
+			mkdir palemoonbuild
+			cd palemoonbuild
+			wget https://aur.archlinux.org/cgit/aur.git/snapshot/palemoon.tar.gz
+			tar xvfz palemoon.tar.gz
+			cd palemoon
+			makepkg -sri
+			exit 0
 		else 
 			echo "Dunno what you're using, sorry bruh."
 			echo "Hopefully you're intelligent enough to install the dependancies and continue manually"
