@@ -129,9 +129,9 @@ case "$(uname -s)" in
 		ln -s /usr/home /home
 		ln -s /root /usr/home/root
 		cd /root
-		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/bsdmozconfig.txt
+		https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/bsdmozconfig.txt
 		mv bsdmozconfig.txt mozconfig.txt
-		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.5/build.sh
+		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/build.sh
 	;;
 esac
 chmod +x build.sh
