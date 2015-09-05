@@ -91,6 +91,7 @@ case "$(uname -s)" in
 		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linmozconfig.txt
 		mv linbuild.sh build.sh
 		mv linmozconfig.txt mozconfig.txt
+	fi
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
