@@ -36,13 +36,13 @@ case "$(uname -s)" in
 		exit 1
 	;;
 	Linux)
-		echo "Linux? Bleh. I currently support CentOS, and Arch AUR builds"
+		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
 		if ls /usr/bin | grep -q apt-get; then
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
-					echo "CentOS 6! Gross! At least you don't have systemd.... Lemme grab those deps for you bruh"
+					echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
 					wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 					rpm -ivh epel-release-6-8.noarch.rpm
 					yum update -y
@@ -81,8 +81,8 @@ case "$(uname -s)" in
 					makepkg -sri
 					exit 0
 		else 
-			echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
-			echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
+			echo "Dunno what you're using, sorry bruh."
+			echo "Hopefully you're intelligent enough to install the dependancies and continue manually"
 			exit 1
 		fi
 		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linbuild.sh
@@ -135,6 +135,7 @@ echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
+#bash ./autobuild.sh
 case "$(uname -s)" in
 	Linux)
 		scl enable devtoolset-1.1 ./build.sh
