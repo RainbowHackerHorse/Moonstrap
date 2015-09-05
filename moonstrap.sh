@@ -85,6 +85,7 @@ case "$(uname -s)" in
 				echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
 				echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
 				exit 1
+				fi
 			fi
 		fi
 		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linbuild.sh
