@@ -6,17 +6,19 @@ cat <<"EOT"
   /  |/  /__  ___  ___  ___/ /________ ____ 
  / /|_/ / _ \/ _ \/ _ \(_-< __/ __/ _ `/ _ \
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
-                                     /_/     
+									 /_/     
 
-Moonstrap Version 0.6
-Pale Moon Version 26 Beta 2 (Git Master Branch)    
+Moonstrap Version 0.7
+Pale Moon Version 25.7 Release
+
+Note: Arch support has been added, using the current AUR.  
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
 This script is released under a Simplified 2-Clause BSD license. Support 
 truely Free software, and use a BSD license for your projects. 
 GPL restrictions just make it Open, not Free.
-										 
+
 EOT
 }
 
@@ -36,25 +38,10 @@ case "$(uname -s)" in
 	Linux)
 		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
-       if ls /usr/bin | grep -q apt-get; then
-           echo "You're using a Debian Derivative! Let's find out which"
-           if cat /etc/*-release | grep -q Ubuntu; then
-           echo "Ubuntu! Aren't you special? I bet you think you're so great, having just switched from Windows! I don't have support for you yet."
-           exit 1
-#           apt-get update
-#           apt-get upgrade
-#           apt-get install #deps list
-         else
-           if cat /etc/*-release | grep -q Debian; then
-               echo "Debian! Woohoo! I'd install your deps but I don't support you yet bruh"
-               exit 1
-#               apt-get update
-#               apt-get upgrade
-#               apt-get install # deps go here
-		else
-			if ls /usr/bin | grep -q yum; then
-			echo "You're using a Yum distro! CentOS 6 is the only supported one, let's check that distro!"
-				if cat /etc/*-release | grep -q "CentOS release 6"; then
+		if ls /usr/bin | grep -q apt-get; then
+			echo "You're using a Debian Derivative! I don't support you yet, sorry"
+			exit 1
+		elif cat /etc/*-release | grep -q "CentOS release 6"; then
 					echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
 					wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 					rpm -ivh epel-release-6-8.noarch.rpm
@@ -80,20 +67,28 @@ case "$(uname -s)" in
 					yum install -y 
 					cd
 					ln -s /root /home/root
-
-			else 
-				echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
-				echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
-				exit 1
-				fi
-			fi
+		elif ls /usr/bin | grep -q pacman; then
+					echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
+					pacman -Syu
+					pacman -S --needed base-devel
+					echo "Grabbin the AUR pkgbuild! Oh yeah, we're gettin sexy up in here!"
+					# Trying AUR. Maybe this works, maybe it doesn't. Someone with arch please test? <3
+					mkdir palemoonbuild
+					cd palemoonbuild
+					wget https://aur.archlinux.org/cgit/aur.git/snapshot/palemoon.tar.gz
+					tar xvfz palemoon.tar.gz
+					cd palemoon
+					makepkg -sri
+					exit 0
+		else 
+			echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
+			echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
+			exit 1
 		fi
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linbuild.sh
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linmozconfig.txt
+		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linbuild.sh
+		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linmozconfig.txt
 		mv linbuild.sh build.sh
 		mv linmozconfig.txt mozconfig.txt
-	fi
-	fi #I guess I miscounted my ifs? something should be tabbed further in somewhere...
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
@@ -106,7 +101,7 @@ case "$(uname -s)" in
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 		x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc49 shells/bash devel/py-virtualenv devel/git \
+		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc47 shells/bash devel/py-virtualenv devel/git \
 		devel/py-gobject devel/dbus devel/yasm
 
 		echo "Installing Library Dependancies"
@@ -118,10 +113,10 @@ case "$(uname -s)" in
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
 		echo "Modifying /etc/make.conf as Pale Moon will not build correctly with Clang"
-		echo "CC=gcc49" > /etc/make.conf
-		echo "CPP=cpp49" >> /etc/make.conf
-		echo "CXX=g++49" >> /etc/make.conf
-		echo "USE_GCC=gcc49" >> /etc/make.conf
+		echo "CC=gcc47" > /etc/make.conf
+		echo "CPP=cpp47" >> /etc/make.conf
+		echo "CXX=g++47" >> /etc/make.conf
+		echo "USE_GCC=gcc47" >> /etc/make.conf
 
 		echo "Setting up build environment in /root"
 
@@ -137,7 +132,7 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
+git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
 #cd pmsrc
 #autoconf
 #cd ..
