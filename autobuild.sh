@@ -12,3 +12,4 @@ gmake -f client.mk build &> /dev/stdout | tee buildlog.txt
   if [ ${PIPESTATUS[0]} == 0 ]; then
     cd "../pmbuild"
     gmake package
+  fi
