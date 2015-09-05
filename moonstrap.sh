@@ -93,6 +93,7 @@ case "$(uname -s)" in
 		mv linbuild.sh build.sh
 		mv linmozconfig.txt mozconfig.txt
 	fi
+	fi #I guess I miscounted my ifs? something should be tabbed further in somewhere...
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
