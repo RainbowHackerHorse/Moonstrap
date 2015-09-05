@@ -133,13 +133,8 @@ chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
-#cd pmsrc
-#autoconf
-#cd ..
 chmod -R +x pmsrc/
-#./pmsrc/configure
 echo "Building! Cross your fingers!"
-#bash ./autobuild.sh
 case "$(uname -s)" in
 	Linux)
 		scl enable devtoolset-1.1 ./build.sh
