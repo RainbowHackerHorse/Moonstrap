@@ -6,12 +6,10 @@ cat <<"EOT"
   /  |/  /__  ___  ___  ___/ /________ ____ 
  / /|_/ / _ \/ _ \/ _ \(_-< __/ __/ _ `/ _ \
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
-				     /_/     
+									 /_/     
 
 Moonstrap Version 0.7
 Pale Moon Version 25.7 Release
-
-Note: Arch support has been added, using the current AUR.  
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
@@ -71,15 +69,20 @@ case "$(uname -s)" in
 			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
 			pacman -Syu
 			pacman -S --needed base-devel
-			echo "Grabbin the AUR pkgbuild! Oh yeah, we're gettin sexy up in here!"
-			# Trying AUR. Maybe this works, maybe it doesn't. Someone with arch please test? <3
-			mkdir palemoonbuild
-			cd palemoonbuild
-			wget https://aur.archlinux.org/cgit/aur.git/snapshot/palemoon.tar.gz
-			tar xvfz palemoon.tar.gz
-			cd palemoon
-			makepkg -sri
-			exit 0
+			echo "Grabbin them deps, baby. Might wanna check out https://aur.archlinux.org/packages/palemoon/ too"
+			pacman -Sy alsa-lib dbus-glib desktop-file-utils gtk2 libxt mime-types nss autoconf2.13 git \
+			gstreamer0.10 gstreamer0.10-base-plugins python2 unzip yasm zip \
+			gstreamer0.10-bad-plugins gstreamer0.10-good-plugins \
+			gstreamer0.10-ugly-plugins hunspell hyphen libpulse
+			echo "now I need to alias python 2.7 to python for this to build. Cool? (y/n)"
+			read -n 1 ch
+			if [ "$ch" == "n" ] ; then
+			echo "OKIEDOKIELOKIE BRO"
+			exit 1
+			else
+  			echo "Cool, aliasing and moving on!"
+  			ln -s /usr/bin/python2.7 /usr/bin/python
+			fi
 		else 
 			echo "Dunno what you're using, sorry bruh."
 			echo "Hopefully you're intelligent enough to install the dependancies and continue manually"
@@ -138,7 +141,10 @@ echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
 case "$(uname -s)" in
 	Linux)
+		if cat /etc/*-release | grep -q "CentOS release 6"; then
 		scl enable devtoolset-1.1 ./build.sh
+		else bash ./build.sh
+		fi
 	;;
 	FreeBSD)
 		bash ./build.sh
