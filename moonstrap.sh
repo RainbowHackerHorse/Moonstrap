@@ -8,15 +8,15 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.6
-Pale Moon Version 26 Beta 2 (Git Master Branch)    
+Moonstrap Version 0.7
+Pale Moon Version 25.7 Release
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
 This script is released under a Simplified 2-Clause BSD license. Support 
 truely Free software, and use a BSD license for your projects. 
 GPL restrictions just make it Open, not Free.
-										 
+
 EOT
 }
 
@@ -36,64 +36,62 @@ case "$(uname -s)" in
 	Linux)
 		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
-       if ls /usr/bin | grep -q apt-get; then
-           echo "You're using a Debian Derivative! Let's find out which"
-           if cat /etc/*-release | grep -q Ubuntu; then
-           echo "Ubuntu! Aren't you special? I bet you think you're so great, having just switched from Windows! I don't have support for you yet."
-           exit 1
-#           apt-get update
-#           apt-get upgrade
-#           apt-get install #deps list
-         else
-           if cat /etc/*-release | grep -q Debian; then
-               echo "Debian! Woohoo! I'd install your deps but I don't support you yet bruh"
-               exit 1
-#               apt-get update
-#               apt-get upgrade
-#               apt-get install # deps go here
-		else
-			if ls /usr/bin | grep -q yum; then
-			echo "You're using a Yum distro! CentOS 6 is the only supported one, let's check that distro!"
-				if cat /etc/*-release | grep -q "CentOS release 6"; then
-					echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
-					wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-					rpm -ivh epel-release-6-8.noarch.rpm
-					yum update -y
-					yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
-					yum groupinstall -y 'Development Tools' 'GNOME Software Development'
-					yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
-					wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
-					tar -xf Python-2.7.6.tar.xz
-					cd Python-2.7.6
-					./configure --prefix=/usr/local
-					make
-					make altinstall # don't use make install, as that will replace the system python!
-					wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-					python2.7 ez_setup.py
-					easy_install-2.7 pip
-					pip2.7 install virtualenv 
-					cd /etc/yum.repos.d
-					wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
-					yum update -y
-					yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
-					yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
-					yum install -y 
-					cd
-					ln -s /root /home/root
-
-			else 
-				echo "Dunno what you're using, sorry bruh. I don't care enough to support Gentoo, Arch, Slack, or OTHER"
-				echo "But if you're using one of them you're intelligent enough to install the dependancies and continue manually"
-				exit 1
-				fi
+		if ls /usr/bin | grep -q apt-get; then
+			echo "You're using a Debian Derivative! I don't support you yet, sorry"
+			exit 1
+		elif cat /etc/*-release | grep -q "CentOS release 6"; then
+			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
+			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+			rpm -ivh epel-release-6-8.noarch.rpm
+			yum update -y
+			yum install -y autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+			yum groupinstall -y 'Development Tools' 'GNOME Software Development'
+			yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
+			wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+			tar -xf Python-2.7.6.tar.xz
+			cd Python-2.7.6
+			./configure --prefix=/usr/local
+			make
+			make altinstall # don't use make install, as that will replace the system python!
+			wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+			python2.7 ez_setup.py
+			easy_install-2.7 pip
+			pip2.7 install virtualenv 
+			cd /etc/yum.repos.d
+			wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
+			yum update -y
+			yum install -y devtoolset-1.1-{gcc,gcc-c++,binutils,elfutils}
+			yum install -y glib gtk+ gtk+-devel gtk2-devel dbus dbus-x11 dbus-glib dbus-glib-devel
+			yum install -y 
+			cd
+			ln -s /root /home/root
+		elif ls /usr/bin | grep -q pacman; then
+			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
+			pacman -Syu
+			pacman -S --needed base-devel
+			echo "Grabbin them deps, baby. Might wanna check out https://aur.archlinux.org/packages/palemoon/ too"
+			pacman -Sy alsa-lib dbus-glib desktop-file-utils gtk2 libxt mime-types nss autoconf2.13 git \
+			gstreamer0.10 gstreamer0.10-base-plugins python2 unzip yasm zip \
+			gstreamer0.10-bad-plugins gstreamer0.10-good-plugins \
+			gstreamer0.10-ugly-plugins hunspell hyphen libpulse
+			echo "now I need to alias python 2.7 to python for this to build. Cool? (y/n)"
+			read -n 1 ch
+			if [ "$ch" == "n" ] ; then
+			echo "OKIEDOKIELOKIE BRO"
+			exit 1
+			else
+  			echo "Cool, aliasing and moving on!"
+  			ln -s /usr/bin/python2.7 /usr/bin/python
 			fi
+		else 
+			echo "Dunno what you're using, sorry bruh."
+			echo "Hopefully you're intelligent enough to install the dependancies and continue manually"
+			exit 1
 		fi
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linbuild.sh
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.6/linmozconfig.txt
+		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linbuild.sh
+		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linmozconfig.txt
 		mv linbuild.sh build.sh
 		mv linmozconfig.txt mozconfig.txt
-	fi
-	fi #I guess I miscounted my ifs? something should be tabbed further in somewhere...
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
@@ -106,7 +104,7 @@ case "$(uname -s)" in
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 		x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc49 shells/bash devel/py-virtualenv devel/git \
+		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc47 shells/bash devel/py-virtualenv devel/git \
 		devel/py-gobject devel/dbus devel/yasm
 
 		echo "Installing Library Dependancies"
@@ -118,10 +116,10 @@ case "$(uname -s)" in
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
 		echo "Modifying /etc/make.conf as Pale Moon will not build correctly with Clang"
-		echo "CC=gcc49" > /etc/make.conf
-		echo "CPP=cpp49" >> /etc/make.conf
-		echo "CXX=g++49" >> /etc/make.conf
-		echo "USE_GCC=gcc49" >> /etc/make.conf
+		echo "CC=gcc47" > /etc/make.conf
+		echo "CPP=cpp47" >> /etc/make.conf
+		echo "CXX=g++47" >> /etc/make.conf
+		echo "USE_GCC=gcc47" >> /etc/make.conf
 
 		echo "Setting up build environment in /root"
 
@@ -129,7 +127,7 @@ case "$(uname -s)" in
 		ln -s /usr/home /home
 		ln -s /root /usr/home/root
 		cd /root
-		https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/bsdmozconfig.txt
+		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/bsdmozconfig.txt
 		mv bsdmozconfig.txt mozconfig.txt
 		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/build.sh
 	;;
@@ -137,17 +135,16 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-git clone https://github.com/MoonchildProductions/Pale-Moon.git pmsrc
-#cd pmsrc
-#autoconf
-#cd ..
+git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
 chmod -R +x pmsrc/
-#./pmsrc/configure
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
 case "$(uname -s)" in
 	Linux)
+		if cat /etc/*-release | grep -q "CentOS release 6"; then
 		scl enable devtoolset-1.1 ./build.sh
+		else bash ./build.sh
+		fi
 	;;
 	FreeBSD)
 		bash ./build.sh
