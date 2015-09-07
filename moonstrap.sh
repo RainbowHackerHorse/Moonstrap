@@ -124,18 +124,34 @@ case "$(uname -s)" in
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
 		echo "Setting up GCC as default compiler..."
+		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ "
+		echo "THIS WILL BUTTFUCK CLANG BY REMOVING CC AND C++ FROM /usr/bin"
+		echo "AND REPLACE THEM WITH SYMLINKS TO GCC47"
+		echo "PLEASE CONFIRM!"
+		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ /!\ "
+		read -n 1 ch
+		if [ "$ch" == "n" ] ; then
+			echo "OKIEDOKIELOKIE BRO"
+			exit 1
+		else
+  			echo "Cool, moving on"
+		fi
 		if ls /usr/local/bin | grep -q gcc; then
 			echo "Removing old gcc symlink"
 			rm /usr/local/bin/gcc
 			rm /usr/local/bin/g++
 			rm /usr/local/lib/gcc
 			rm /usr/local/bin/gcj
+			rm /usr/bin/cc
+			rm /usr/bin/c++
 		else echo "..........."
 		fi
 		ln -s /usr/local/lib/gcc47 /usr/local/lib/gcc
 		ln -s /usr/local/bin/gcc47 /usr/local/bin/gcc
 		ln -s /usr/local/bin/g++47 /usr/local/bin/g++
 		ln -s /usr/local/bin/gcj47 /usr/local/bin/gcj
+		ln -s /usr/local/bin/gcc47 /usr/bin/cc
+		ln -s /usr/local/bin/g++47 /usr/bin/c++
 		echo "Setting up build environment in /root"
 
 		mkdir /usr/home
