@@ -8,7 +8,7 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.7
+Moonstrap Version 0.8
 Pale Moon Version 25.7 Release
 
 You should have received a License file, if you cloned from Github.
@@ -65,7 +65,7 @@ case "$(uname -s)" in
 			yum install -y 
 			cd
 			ln -s /root /home/root
-		elif ls /usr/bin | grep -q pacman; then
+		elif cat /etc/*-release | grep -q "Arch"; then
 			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
 			pacman -Syu
 			pacman -S --needed base-devel
@@ -77,11 +77,11 @@ case "$(uname -s)" in
 			echo "now I need to alias python 2.7 to python for this to build. Cool? (y/n)"
 			read -n 1 ch
 			if [ "$ch" == "n" ] ; then
-			echo "OKIEDOKIELOKIE BRO"
-			exit 1
+				echo "OKIEDOKIELOKIE BRO"
+				exit 1
 			else
-  			echo "Cool, aliasing and moving on!"
-  			ln -s /usr/bin/python2.7 /usr/bin/python
+  				echo "Cool, aliasing and moving on!"
+  				ln -s /usr/bin/python2.7 /usr/bin/python
 			fi
 		else 
 			echo "Dunno what you're using, sorry bruh."
@@ -95,6 +95,14 @@ case "$(uname -s)" in
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
+		echo "I need you to confirm you understand this script makes weird changes to the OS. DON'T CONTINUE IF I'M NOT A JAIL! Cool? (y/n)"
+		read -n 1 ch
+		if [ "$ch" == "n" ] ; then
+			echo "OKIEDOKIELOKIE BRO"
+			exit 1
+		else
+  			echo "Cool, moving on"
+		fi
 		echo "Bootstrapping build environment..."
 		echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
 		echo "Calling pkgng: "
@@ -104,7 +112,7 @@ case "$(uname -s)" in
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 		x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc47 shells/bash devel/py-virtualenv devel/git \
+		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc5 shells/bash devel/py-virtualenv devel/git \
 		devel/py-gobject devel/dbus devel/yasm
 
 		echo "Installing Library Dependancies"
@@ -115,12 +123,16 @@ case "$(uname -s)" in
 		x11/startup-notification audio/alsa-lib converters/libiconv graphics/jpeg accessibility/atk \
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
-		echo "Modifying /etc/make.conf as Pale Moon will not build correctly with Clang"
-		echo "CC=gcc47" > /etc/make.conf
-		echo "CPP=cpp47" >> /etc/make.conf
-		echo "CXX=g++47" >> /etc/make.conf
-		echo "USE_GCC=gcc47" >> /etc/make.conf
-
+		echo "Setting up GCC as default compiler..."
+		if ls /usr/local/bin | grep -q gcc; then
+			echo "removing old gcc symlink"
+			rm /usr/local/bin/gcc
+			rm /usr/local/bin/g++
+		else echo "..........."
+		fi
+		ln -s /usr/local/lib/gcc5 /usr/local/lib/gcc
+		ln -s /usr/local/bin/gcc5 /usr/local/bin/gcc
+		ln -s /usr/local/bin/g++5 /usr/local/bin/g++
 		echo "Setting up build environment in /root"
 
 		mkdir /usr/home
