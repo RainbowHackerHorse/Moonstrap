@@ -125,14 +125,17 @@ case "$(uname -s)" in
 
 		echo "Setting up GCC as default compiler..."
 		if ls /usr/local/bin | grep -q gcc; then
-			echo "removing old gcc symlink"
+			echo "Removing old gcc symlink"
 			rm /usr/local/bin/gcc
 			rm /usr/local/bin/g++
+			rm /usr/local/lib/gcc
+			rm /usr/local/bin/gcj
 		else echo "..........."
 		fi
 		ln -s /usr/local/lib/gcc47 /usr/local/lib/gcc
 		ln -s /usr/local/bin/gcc47 /usr/local/bin/gcc
 		ln -s /usr/local/bin/g++47 /usr/local/bin/g++
+		ln -s /usr/local/bin/gcj47 /usr/local/bin/gcj
 		echo "Setting up build environment in /root"
 
 		mkdir /usr/home
