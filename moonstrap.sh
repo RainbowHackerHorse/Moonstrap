@@ -112,7 +112,7 @@ case "$(uname -s)" in
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 		x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc5 shells/bash devel/py-virtualenv devel/git \
+		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc47 shells/bash devel/py-virtualenv devel/git \
 		devel/py-gobject devel/dbus devel/yasm
 
 		echo "Installing Library Dependancies"
@@ -130,9 +130,9 @@ case "$(uname -s)" in
 			rm /usr/local/bin/g++
 		else echo "..........."
 		fi
-		ln -s /usr/local/lib/gcc5 /usr/local/lib/gcc
-		ln -s /usr/local/bin/gcc5 /usr/local/bin/gcc
-		ln -s /usr/local/bin/g++5 /usr/local/bin/g++
+		ln -s /usr/local/lib/gcc47 /usr/local/lib/gcc
+		ln -s /usr/local/bin/gcc47 /usr/local/bin/gcc
+		ln -s /usr/local/bin/g++47 /usr/local/bin/g++
 		echo "Setting up build environment in /root"
 
 		mkdir /usr/home
