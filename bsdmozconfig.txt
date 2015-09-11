@@ -19,3 +19,6 @@ ac_add_options --enable-optimize="-O2 -msse2 -mfpmath=sse"
 
 ac_add_options --x-libraries=/usr/local/lib
 ac_add_options --disable-necko-wifi
+
+export CFLAGS="-ftree-vrp"
+export CXXFLAGS="-ftree-vrp"
