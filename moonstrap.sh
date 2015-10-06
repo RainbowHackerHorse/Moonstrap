@@ -107,7 +107,7 @@ case "$(uname -s)" in
 		echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
 		echo "Calling pkgng: "
 
-		pkg install devel/nspr security/nss devel/libevent2 audio/soundtouch print/harfbuzz \
+		pkg install -y devel/nspr security/nss devel/libevent2 audio/soundtouch print/harfbuzz \
 		graphics/graphite2 audio/libvorbis multimedia/libvpx databases/sqlite3 databases/py-sqlite3 \
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
@@ -117,7 +117,7 @@ case "$(uname -s)" in
 
 		echo "Installing Library Dependancies"
 
-		pkg install multimedia/libv4l graphics/cairo devel/libevent2 devel/libffi graphics/graphite2 \
+		pkg install -y multimedia/libv4l graphics/cairo devel/libevent2 devel/libffi graphics/graphite2 \
 		print/harfbuzz textproc/hunspell devel/icu devel/nspr security/nss graphics/png x11/pixman \
 		audio/soundtouch databases/sqlite3 multimedia/libvpx audio/libvorbis devel/dbus-glib \
 		x11/startup-notification audio/alsa-lib converters/libiconv graphics/jpeg accessibility/atk \
@@ -127,6 +127,7 @@ case "$(uname -s)" in
 		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ "
 		echo "THIS WILL BUTTFUCK CLANG BY REMOVING CC AND C++ FROM /usr/bin"
 		echo "AND REPLACE THEM WITH SYMLINKS TO GCC47"
+		echo "This will NOT be a part of the process when entered in the Ports Tree"
 		echo "PLEASE CONFIRM!"
 		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ /!\ "
 		read -n 1 ch
@@ -166,7 +167,8 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
+# git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
+git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
