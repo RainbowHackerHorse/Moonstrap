@@ -4,7 +4,7 @@ The script is optimised for use in a FreeBSD 10.2-RELEASE jail built by iocage.
 However, Moonstrap now supports select Linux Distros (read: the ones I bothered to figure out deps lists for)
 That's right, Moonstrap has super sweet ultra futuristic 1980's OS Detection Technology
 courtesy of sh!
-Right now, Moonstrap supports FreeBSD, CentOS Linux 6, and Arch/SystemD(because let's face it, that's SystemD's goal. "News from the future: Today, the SystemD OS project announced that Linux Kernel functionality would now be supplied via systemd-kerneld"), Debian Linux and Ubuntu Linux
+Right now, Moonstrap supports FreeBSD, CentOS Linux 6, and Arch/SystemD ( :P ), Debian Linux and Ubuntu Linux
 support is planned for the future.
 
 http://www.palemoon.org/
