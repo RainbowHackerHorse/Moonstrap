@@ -4,3 +4,4 @@ Moonstrap changelog
 0.5 - Added super futuristic OS detection to insult non-FreeBSD users and error out instead of breaking their systems. Fixed FreeBSD support.
 0.6 - Added CentOS support, staged bs in commented lines for debian and utanbu
 0.7 - Added Arch support. Removed Deb/Utanbu stuff. Cleaned up everything forever www.rick and morty forever all the adventures rick and morty dot com forever. Moved from Git master for PaleMoon to 25.7 Release branch. From now on, will track latest release, not master. Also added this changelog.
+0.8 - More FreeBSD support fixes, leads to an actual compiled binary that runs (I think!) Wheeee! Coincides with patches in Pale Moon to fix some issues during compilation on . Also more cleanup and fixes in general
