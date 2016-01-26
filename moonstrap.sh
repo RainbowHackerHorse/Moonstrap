@@ -23,9 +23,7 @@ EOT
 pmlogo
 
 echo "This script written by Rainbow."
-echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
-echo "The original script can always be found at "
-echo "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
+echo "Follow me on Twitter (or don't. I don't really care.) @Hacker_Horse"
 
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
