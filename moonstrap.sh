@@ -95,14 +95,6 @@ case "$(uname -s)" in
 	;;
 	FreeBSD)
 		echo "FreeBSD! Doin' it right, bruh! Go UNIX!"
-		echo "I need you to confirm you understand this script makes weird changes to the OS. DON'T CONTINUE IF I'M NOT A JAIL! Cool? (y/n)"
-		read -n 1 ch
-		if [ "$ch" == "n" ] ; then
-			echo "OKIEDOKIELOKIE BRO"
-			exit 1
-		else
-  			echo "Cool, moving on"
-		fi
 		echo "Bootstrapping build environment..."
 		echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
 		echo "Calling pkgng: "
@@ -124,37 +116,12 @@ case "$(uname -s)" in
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
 		echo "Setting up GCC as default compiler..."
-		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ "
-		echo "THIS WILL BUTTFUCK CLANG BY REMOVING CC AND C++ FROM /usr/bin"
-		echo "AND REPLACE THEM WITH SYMLINKS TO GCC47"
-		echo "This will NOT be a part of the process when entered in the Ports Tree"
-		echo "PLEASE CONFIRM!"
-		echo "/!\ /!\ /!\ WARNING WARNING WARNING /!\ /!\ /!\ /!\ "
-		read -n 1 ch
-		if [ "$ch" == "n" ] ; then
-			echo "OKIEDOKIELOKIE BRO"
-			exit 1
-		else
-  			echo "Cool, moving on"
-		fi
-		if ls /usr/local/bin | grep -q gcc; then
-			echo "Removing old gcc symlink"
-			rm /usr/local/bin/gcc
-			rm /usr/local/bin/g++
-			rm /usr/local/lib/gcc
-			rm /usr/local/bin/gcj
-			rm /usr/bin/cc
-			rm /usr/bin/c++
-		else echo "..........."
-		fi
-		ln -s /usr/local/lib/gcc49 /usr/local/lib/gcc
-		ln -s /usr/local/bin/gcc49 /usr/local/bin/gcc
-		ln -s /usr/local/bin/g++49 /usr/local/bin/g++
-		ln -s /usr/local/bin/gcj49 /usr/local/bin/gcj
-		ln -s /usr/local/bin/gcc49 /usr/bin/cc
-		ln -s /usr/local/bin/g++49 /usr/bin/c++
+		CC=gcc49
+		CXX=g++49
+		CPP=cpp49
+		GCJ=gcj49
+		export CC CXX CPP GCJ
 		echo "Setting up build environment in /root"
-
 		mkdir /usr/home
 		ln -s /usr/home /home
 		ln -s /root /usr/home/root
