@@ -8,8 +8,8 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.8
-Pale Moon Version 25.7 Release
+Moonstrap Version 0.9
+Pale Moon Version 26.2.0 Release
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
