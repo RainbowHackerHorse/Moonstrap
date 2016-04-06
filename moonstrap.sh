@@ -133,6 +133,8 @@ echo "Grabbing source from Git Branch..."
 git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 26.2_RelBranch --single-branch pmsrc
 # git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
+# Uncomment the next line for 32-bit builds
+#export CFLAGS=-m32
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
 case "$(uname -s)" in
