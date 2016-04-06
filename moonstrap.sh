@@ -38,7 +38,6 @@ case "$(uname -s)" in
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
-			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
 			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 			rpm -ivh epel-release-6-8.noarch.rpm
 			yum update -y
@@ -64,7 +63,6 @@ case "$(uname -s)" in
 			cd
 			ln -s /root /home/root
 		elif cat /etc/*-release | grep -q "Arch"; then
-			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
 			pacman -Syu
 			pacman -S --needed base-devel
 			echo "Grabbin them deps, baby. Might wanna check out https://aur.archlinux.org/packages/palemoon/ too"
@@ -132,7 +130,7 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 26.2.0_RelBranch --single-branch pmsrc
+git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 26.2_RelBranch --single-branch pmsrc
 # git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
