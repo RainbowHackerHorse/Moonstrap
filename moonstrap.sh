@@ -1,4 +1,31 @@
 #!/bin/sh
+
+
+# Copyright (c) 2015, 2016 RainbowHackerHorse
+#All rights reserved.
+#
+#Redistribution and use in source and binary forms, with or without
+#modification, are permitted provided that the following conditions are met:
+#
+#* Redistributions of source code must retain the above copyright notice, this
+#  list of conditions and the following disclaimer.
+#
+#* Redistributions in binary form must reproduce the above copyright notice,
+#  this list of conditions and the following disclaimer in the documentation
+#  and/or other materials provided with the distribution.
+#
+#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+#DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+#FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+#OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+#OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
 pmlogo() {
 cat <<"EOT"
 
@@ -32,7 +59,6 @@ case "$(uname -s)" in
 		exit 1
 	;;
 	Linux)
-		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
 		echo "Now detecting your Distribution"
 		if ls /usr/bin | grep -q apt-get; then
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
@@ -86,8 +112,8 @@ case "$(uname -s)" in
 			echo "Hopefully you're intelligent enough to install the dependancies and continue manually"
 			exit 1
 		fi
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linbuild.sh
-		wget https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/linmozconfig.txt
+		wget https://raw.githubusercontent.com/RainbowHackerHorse/Moonstrap/master/linbuild.sh
+		wget https://raw.githubusercontent.com/RainbowHackerHorse/Moonstrap/master/linmozconfig.txt
 		mv linbuild.sh build.sh
 		mv linmozconfig.txt mozconfig.txt
 	;;
@@ -124,16 +150,16 @@ case "$(uname -s)" in
 		ln -s /usr/home /home
 		ln -s /root /usr/home/root
 		cd /root
-		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.8/bsdmozconfig.txt
+		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackerHorse/Moonstrap/Moonstrap-0.9/bsdmozconfig.txt
 		mv bsdmozconfig.txt mozconfig.txt
-		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/build.sh
+		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackerHorse/Moonstrap/master/build.sh
 	;;
 esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-# git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
-git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
+git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 26.2.0_RelBranch --single-branch pmsrc
+# git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
