@@ -4,17 +4,17 @@ cat <<"EOT"
 
    __  ___                  __              
   /  |/  /__  ___  ___  ___/ /________ ____ 
- / /|_/ / _ \/ _ \/ _ \(_-< __/ __/ _ `/ _ \
+ / /|_/ / _ \/ _ \/ _ \(_-< __/ __/ _  / _ \
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.7
+Moonstrap Version 0.8
 Pale Moon Version 25.7 Release
 
 You should have received a License file, if you cloned from Github.
 If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
 This script is released under a Simplified 2-Clause BSD license. Support 
-truely Free software, and use a BSD license for your projects. 
+truly Free software, and use a BSD license for your projects. 
 GPL restrictions just make it Open, not Free.
 
 EOT
@@ -23,9 +23,7 @@ EOT
 pmlogo
 
 echo "This script written by Rainbow."
-echo "Follow me on Twitter (or don't. I don't really care.) @RainbowHacks"
-echo "The original script can always be found at "
-echo "http://cloudsdale.ponix.space/~rainbow/scripts/palemoonfbsd/moonstrap.sh"                                         
+echo "Follow me on Twitter (or don't. I don't really care.) @Hacker_Horse"
 
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
@@ -65,7 +63,7 @@ case "$(uname -s)" in
 			yum install -y 
 			cd
 			ln -s /root /home/root
-		elif ls /usr/bin | grep -q pacman; then
+		elif cat /etc/*-release | grep -q "Arch"; then
 			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
 			pacman -Syu
 			pacman -S --needed base-devel
@@ -77,11 +75,11 @@ case "$(uname -s)" in
 			echo "now I need to alias python 2.7 to python for this to build. Cool? (y/n)"
 			read -n 1 ch
 			if [ "$ch" == "n" ] ; then
-			echo "OKIEDOKIELOKIE BRO"
-			exit 1
+				echo "OKIEDOKIELOKIE BRO"
+				exit 1
 			else
-  			echo "Cool, aliasing and moving on!"
-  			ln -s /usr/bin/python2.7 /usr/bin/python
+  				echo "Cool, aliasing and moving on!"
+  				ln -s /usr/bin/python2.7 /usr/bin/python
 			fi
 		else 
 			echo "Dunno what you're using, sorry bruh."
@@ -99,35 +97,34 @@ case "$(uname -s)" in
 		echo "Using build dependancy list from http://www.freshports.org/www/firefox/"
 		echo "Calling pkgng: "
 
-		pkg install devel/nspr security/nss devel/libevent2 audio/soundtouch print/harfbuzz \
+		pkg install -y devel/nspr security/nss devel/libevent2 audio/soundtouch print/harfbuzz \
 		graphics/graphite2 audio/libvorbis multimedia/libvpx databases/sqlite3 databases/py-sqlite3 \
 		multimedia/v4l_compat devel/autoconf213 archivers/zip archivers/unzip devel/libnotify \
 		devel/gmake devel/pkgconf lang/python27 devel/desktop-file-utils graphics/cairo graphics/libGL \
 		x11/glproto x11/dri2proto x11/libXext x11/libXrender x11-toolkits/libXt multimedia/gstreamer1-plugins-good \
-		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc47 shells/bash devel/py-virtualenv devel/git \
+		multimedia/gstreamer1-libav lang/perl5.20 lang/gcc49 shells/bash devel/py-virtualenv devel/git \
 		devel/py-gobject devel/dbus devel/yasm
 
 		echo "Installing Library Dependancies"
 
-		pkg install multimedia/libv4l graphics/cairo devel/libevent2 devel/libffi graphics/graphite2 \
+		pkg install -y multimedia/libv4l graphics/cairo devel/libevent2 devel/libffi graphics/graphite2 \
 		print/harfbuzz textproc/hunspell devel/icu devel/nspr security/nss graphics/png x11/pixman \
 		audio/soundtouch databases/sqlite3 multimedia/libvpx audio/libvorbis devel/dbus-glib \
 		x11/startup-notification audio/alsa-lib converters/libiconv graphics/jpeg accessibility/atk \
 		devel/glib20 x11-toolkits/gtk20 x11-toolkits/pango
 
-		echo "Modifying /etc/make.conf as Pale Moon will not build correctly with Clang"
-		echo "CC=gcc47" > /etc/make.conf
-		echo "CPP=cpp47" >> /etc/make.conf
-		echo "CXX=g++47" >> /etc/make.conf
-		echo "USE_GCC=gcc47" >> /etc/make.conf
-
+		echo "Setting up GCC as default compiler..."
+		CC=gcc49
+		CXX=g++49
+		CPP=cpp49
+		GCJ=gcj49
+		export CC CXX CPP GCJ
 		echo "Setting up build environment in /root"
-
 		mkdir /usr/home
 		ln -s /usr/home /home
 		ln -s /root /usr/home/root
 		cd /root
-		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/bsdmozconfig.txt
+		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/Moonstrap-0.8/bsdmozconfig.txt
 		mv bsdmozconfig.txt mozconfig.txt
 		fetch --no-verify-peer https://raw.githubusercontent.com/RainbowHackz/Moonstrap/master/build.sh
 	;;
@@ -135,7 +132,8 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
+# git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
+git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh

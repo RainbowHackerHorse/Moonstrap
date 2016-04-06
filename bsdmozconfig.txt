@@ -14,8 +14,11 @@ ac_add_options --disable-mochitests
 ac_add_options --disable-debug
 
 ac_add_options --enable-strip
-ac_add_options --enable-jemalloc
+ac_add_options --disable-jemalloc
 ac_add_options --enable-optimize="-O2 -msse2 -mfpmath=sse"
 
 ac_add_options --x-libraries=/usr/local/lib
 ac_add_options --disable-necko-wifi
+
+export CFLAGS="-ftree-vrp"
+export CXXFLAGS="-ftree-vrp"
