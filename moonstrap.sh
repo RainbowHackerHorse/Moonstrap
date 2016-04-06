@@ -38,14 +38,19 @@ case "$(uname -s)" in
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
-			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-			rpm -ivh epel-release-6-8.noarch.rpm
-			# Adding rpmforge, for updated git
-			wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-			rpm -ivh rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+			if file /bin/bash | grep -q 32;
+				then wget wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+				wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
+			else
+				wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+				# Adding rpmforge, for updated git
+				wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+			fi
+			rpm -ivh rpmforge*.rpm
+			rpm -ivh epel*.rpm
 			yum update -y
 			yum -y --disablerepo=base,updates --enablerepo=rpmforge-extras install git
-			yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+			yum install -y glibc-devel autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
 			yum groupinstall -y 'Development Tools' 'GNOME Software Development'
 			yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
 			wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
