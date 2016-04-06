@@ -1,31 +1,5 @@
 #!/bin/sh
 
-
-# Copyright (c) 2015, 2016 RainbowHackerHorse
-#All rights reserved.
-#
-#Redistribution and use in source and binary forms, with or without
-#modification, are permitted provided that the following conditions are met:
-#
-#* Redistributions of source code must retain the above copyright notice, this
-#  list of conditions and the following disclaimer.
-#
-#* Redistributions in binary form must reproduce the above copyright notice,
-#  this list of conditions and the following disclaimer in the documentation
-#  and/or other materials provided with the distribution.
-#
-#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-#DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-#FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-#DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-#SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-#CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-#OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-#OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
 pmlogo() {
 cat <<"EOT"
 
@@ -39,7 +13,7 @@ Moonstrap Version 0.9
 Pale Moon Version 26.2.0 Release
 
 You should have received a License file, if you cloned from Github.
-If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
+If not, please see https://github.com/RainbowHackerHorse/Moonstrap/blob/master/LICENSE
 This script is released under a Simplified 2-Clause BSD license. Support 
 truly Free software, and use a BSD license for your projects. 
 GPL restrictions just make it Open, not Free.
