@@ -52,10 +52,11 @@ case "$(uname -s)" in
 				# Adding rpmforge, for updated git
 				wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 			fi
+			# moving up because things arent working otherwise...
+			yum -y --disablerepo=base,updates --enablerepo=rpmforge-extras install git
 			rpm -ivh rpmforge*.rpm
 			rpm -ivh epel*.rpm
 			yum update -y
-			yum -y --disablerepo=base,updates --enablerepo=rpmforge-extras install git
 			yum install -y glibc-devel autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
 			yum groupinstall -y 'Development Tools' 'GNOME Software Development'
 			yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
