@@ -11,14 +11,9 @@ http://www.palemoon.org/
 https://www.freebsd.org/
 http://iocage.readthedocs.org/en/latest/
 
-Jail creation is automated with MoonstrapJ
-MoonstrapJ only works with FreeBSD.
-
-https://github.com/RainbowHackz/MoonstrapJ
-
 Please note!
 
-Problems with PM currently prevent Pale Moon from building within FreeBSD.
+Problems with PM currently prevent Pale Moon from building within FreeBSD (last I checked. it's been a few months)
 
 --------------------------------------------------------
 INSTRUCTIONS:
