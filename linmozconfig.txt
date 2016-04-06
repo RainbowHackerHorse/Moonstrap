@@ -4,7 +4,7 @@ export MOZILLA_OFFICIAL=1
 mk_add_options MOZ_CO_PROJECT=browser
 ac_add_options --enable-application=browser
 
-mk_add_options MOZ_OBJDIR=/home/$USER/pmbuild/
+mk_add_options MOZ_OBJDIR=$HOME/pmbuild/
 
 ac_add_options --disable-installer
 ac_add_options --disable-updater
