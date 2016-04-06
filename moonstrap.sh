@@ -1,5 +1,8 @@
 #!/bin/sh
 
+set -e 
+#debugging
+
 pmlogo() {
 cat <<"EOT"
 
@@ -39,6 +42,9 @@ case "$(uname -s)" in
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
 			if file /bin/bash | grep -q 32;
+				# uncomment us if missing!
+				# yum -y install file
+				# yum -y groupinstall base
 				then wget wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 				wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.i686.rpm
 			else
