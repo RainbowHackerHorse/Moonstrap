@@ -45,7 +45,7 @@ case "$(uname -s)" in
 			rpm -ivh rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 			yum update -y
 			yum -y --disablerepo=base,updates --enablerepo=rpmforge-extras install git
-			yum install -y glibc-devel.i686 glibc-devel ibstdc++-devel.i686 autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
+			yum install -y glibc-devel.i686 glibc-devel libstdc++-devel.i686 autoconf213 yasm mesa-libGL-devel alsa-lib-devel libXt-devel gstreamer-devel gstreamer-plugins-base-devel pulseaudio-libs-devel
 			yum groupinstall -y 'Development Tools' 'GNOME Software Development'
 			yum install -y zlib-devel openssl-devel sqlite-devel bzip2-devel # dependencies
 			wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
