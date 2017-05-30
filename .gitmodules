@@ -1,0 +1,3 @@
+[submodule "Pale-Moon"]
+	path = Pale-Moon
+	url = https://github.com/MoonchildProductions/Pale-Moon
