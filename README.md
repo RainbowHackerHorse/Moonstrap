@@ -1,24 +1,15 @@
 # Moonstrap
 Moonstrap is a bootstrapper for building the PaleMoon web browser.
-The script is optimised for use in a FreeBSD 10.2-RELEASE jail built by iocage.
+The script is optimised for use in a FreeBSD 11.0-RELEASE jail built by iocage.
 However, Moonstrap now supports select Linux Distros (read: the ones I bothered to figure out deps lists for)
 That's right, Moonstrap has super sweet ultra futuristic 1980's OS Detection Technology
 courtesy of sh!
-Right now, Moonstrap supports FreeBSD, CentOS Linux 6, and Arch/SystemD ( :P ), Debian Linux and Ubuntu Linux
+Right now, Moonstrap supports FreeBSD, CentOS Linux 6, and Arch; Debian Linux and Ubuntu Linux
 support is planned for the future.
 
 http://www.palemoon.org/
 https://www.freebsd.org/
 http://iocage.readthedocs.org/en/latest/
-
-Jail creation is automated with MoonstrapJ
-MoonstrapJ only works with FreeBSD.
-
-https://github.com/RainbowHackz/MoonstrapJ
-
-Please note!
-
-Problems with PM currently prevent Pale Moon from building within FreeBSD.
 
 --------------------------------------------------------
 INSTRUCTIONS:
