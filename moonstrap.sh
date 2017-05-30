@@ -8,11 +8,11 @@ cat <<"EOT"
 /_/  /_/\___/\___/_//_/___|__/_/  \_,_/ .__/
                                      /_/     
 
-Moonstrap Version 0.8
-Pale Moon Version 25.7 Release
+Moonstrap Version 0.8.1
+Pale Moon Version 27.3 Release
 
 You should have received a License file, if you cloned from Github.
-If not, please see https://github.com/RainbowHackz/Moonstrap/blob/master/LICENSE
+If not, please see https://github.com/RainbowHackerHorse/Moonstrap/blob/master/LICENSE
 This script is released under a Simplified 2-Clause BSD license. Support 
 truly Free software, and use a BSD license for your projects. 
 GPL restrictions just make it Open, not Free.
@@ -28,17 +28,16 @@ echo "Follow me on Twitter (or don't. I don't really care.) @Hacker_Horse"
 echo "Now making sure Moonstrap is compatible with your OS..."
 case "$(uname -s)" in
 	Darwin)
-		echo "OS X IS NOT FREEBSD. STAHP."
+		echo "We don\'t support OS X yet."
 		exit 1
 	;;
 	Linux)
-		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for most distros"
+		echo "Linux? Bleh. I don't like you, and I don't like your joke of an OS. But I've got support for some distros"
 		echo "Now detecting your Distribution"
 		if ls /usr/bin | grep -q apt-get; then
 			echo "You're using a Debian Derivative! I don't support you yet, sorry"
 			exit 1
 		elif cat /etc/*-release | grep -q "CentOS release 6"; then
-			echo "CentOS 6! Hooray! Lemme grab those deps for you bruh"
 			wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 			rpm -ivh epel-release-6-8.noarch.rpm
 			yum update -y
@@ -64,7 +63,6 @@ case "$(uname -s)" in
 			cd
 			ln -s /root /home/root
 		elif cat /etc/*-release | grep -q "Arch"; then
-			echo "Arch baby, yeah! I would have stayed on Linux for you, but you chose SystemD instead ;~;"
 			pacman -Syu
 			pacman -S --needed base-devel
 			echo "Grabbin them deps, baby. Might wanna check out https://aur.archlinux.org/packages/palemoon/ too"
@@ -132,8 +130,8 @@ esac
 chmod +x build.sh
 mkdir ~/pmbuild
 echo "Grabbing source from Git Branch..."
-# git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 25.7_RelBranch --single-branch pmsrc
-git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
+git clone https://github.com/MoonchildProductions/Pale-Moon.git --branch 27.3_RelBranch --single-branch pmsrc
+# git clone https://github.com/trav90/Pale-Moon.git --branch bsd-work --single-branch pmsrc
 chmod -R +x pmsrc/
 echo "Building! Cross your fingers!"
 #bash ./autobuild.sh
